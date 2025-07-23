@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.ant-menu-root {
+    border-inline-end: none !important;
+}
