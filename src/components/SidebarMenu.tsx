@@ -3,15 +3,31 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Button, Flex, Menu, Image } from 'antd';
 import { MENU_ROUTES, ROUTES } from '../utils/routes';
 import { observer } from 'mobx-react-lite';
-import store from '../stores/AppStore';
+import { useTranslation } from 'react-i18next';
+import appStore from '../stores/AppStore';
 
 const SideBarMenu: React.FC = observer(() => {
-  const { openTab } = store;
+  const { openTab, state } = appStore;
+  const { t, i18n } = useTranslation();
   const [collapsed, setCollapsed] = React.useState(true);
+
+  // Set the language based on the app state
+  React.useEffect(() => {
+    i18n.changeLanguage(state.lang);
+  }, [i18n, state.lang]);
 
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function translateMenuItems(items: any[]): any[] {
+    return items.map((item) => ({
+      ...item,
+      label: t(item?.label),
+      children: item.children ? translateMenuItems(item.children) : undefined,
+    }));
+  }
 
   function handleOpenMenu({ key }: { key: string }) {
     const selectedItem = ROUTES.find((item) => item.key === key);
@@ -48,7 +64,7 @@ const SideBarMenu: React.FC = observer(() => {
         mode="inline"
         theme="light"
         inlineCollapsed={collapsed}
-        items={MENU_ROUTES}
+        items={translateMenuItems(MENU_ROUTES)}
         onClick={handleOpenMenu}
       />
     </div>

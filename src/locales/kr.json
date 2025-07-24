@@ -2,5 +2,11 @@
   "welcome": "환영합니다",
   "loading": "로딩 중...",
   "Undo": "실행 취소",
-  "Redo": "다시 실행"
+  "Redo": "다시 실행",
+  "Accounting": "회계",
+  "Account Receivables": "외상 매출금",
+  "Human Resources": "인사 관리",
+  "Employee Management": "직원 관리",
+  "Adminitration Registration": "관리 등록",
+  "Admin": "관리자"
 }

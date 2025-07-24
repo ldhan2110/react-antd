@@ -2,9 +2,11 @@ import { App, Tabs } from 'antd';
 import { observer } from 'mobx-react-lite';
 import store from '../stores/AppStore';
 import { ROUTES } from '../utils/routes';
+import { useTranslation } from 'react-i18next';
 
 const MainScreen: React.FC = observer(() => {
   const { modal } = App.useApp();
+  const { t } = useTranslation();
   const { state: appState, setSelectedTab, closeTab } = store;
 
   return (
@@ -36,12 +38,12 @@ const MainScreen: React.FC = observer(() => {
           appState.selectedTab.key != tab.key ? (
             <span
               className="w-[50px] text-center overflow-hidden text-ellipsis whitespace-nowrap inline-block align-middle"
-              title={tab.label}
+              title={t(tab.label)}
             >
-              {tab.label}
+              {t(tab.label)}
             </span>
           ) : (
-            <span>{tab.label}</span>
+            <span>{t(tab.label)}</span>
           ),
         children: ROUTES.find((route) => route.key === tab.key)?.content || null,
         closable: true,
