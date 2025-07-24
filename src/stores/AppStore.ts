@@ -113,6 +113,12 @@ export class RootStore implements IAppStore {
       this.state.darkMode = darkMode;
     });
   };
+  setLang = (lang: 'en' | 'ko' | 'ja') => {
+    runInAction(() => {
+      this.state.lang = lang;
+    });
+    this.saveStateImmediate();
+  };
   openTab = (screen: Tab) => {
     runInAction(() => {
       const existingTab = this.state.openedTabs.find((tab) => tab.key === screen.key);

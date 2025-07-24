@@ -3,6 +3,7 @@ import React from 'react';
 import type { ReactTabulatorProps } from 'react-tabulator/lib/ReactTabulator';
 import ReactTabulator from 'react-tabulator/lib/ReactTabulator';
 import './styles/table.style.css';
+import { useTranslation } from 'react-i18next';
 import { Button } from 'antd';
 
 export type TableColumnProps = ReactTabulatorProps['columns'];
@@ -10,6 +11,7 @@ export type TableColumnProps = ReactTabulatorProps['columns'];
 export type TableProps<T> = ReactTabulatorProps & { data?: T[] };
 
 const Table = <T,>(props: TableProps<T>) => {
+  const { t } = useTranslation();
   const tableRef = React.useRef<any>(null);
 
   const handleUndo = () => {
@@ -23,8 +25,8 @@ const Table = <T,>(props: TableProps<T>) => {
   return (
     <>
       <div style={{ marginBottom: 10, gap: 10, display: 'flex', justifyContent: 'flex-end' }}>
-        <Button onClick={handleUndo}>Undo</Button>
-        <Button onClick={handleRedo}>Redo</Button>
+        <Button onClick={handleUndo}>{t('Undo')}</Button>
+        <Button onClick={handleRedo}>{t('Redo')}</Button>
       </div>
       <ReactTabulator
         {...props}

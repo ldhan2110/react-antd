@@ -5,6 +5,7 @@ import { ConfigProvider, App as AntApp } from 'antd';
 import { AntdTheme } from './utils/theme';
 import AuthGuard from './pages/AuthGuard';
 import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
+import './i18n'; // Ensure i18n is initialized
 import 'react-tabulator/lib/styles.css';
 import './global.css';
 

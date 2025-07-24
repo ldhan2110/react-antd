@@ -10,6 +10,7 @@ export const DEFAULT_SCREEN = {
 // Default state
 export const DEFAULT_STATE: AppState = {
   darkMode: false,
+  lang: 'en',
   openedTabs: [DEFAULT_SCREEN],
   selectedTab: DEFAULT_SCREEN,
 };

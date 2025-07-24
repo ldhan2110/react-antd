@@ -12,6 +12,7 @@ import {
 } from 'antd';
 import { useState } from 'react';
 import { authStore } from '../stores';
+import LanguageSelector from './LanguageSelector';
 
 const Header: React.FC = () => {
   const [options, setOptions] = useState<AutoCompleteProps['options']>([]);
@@ -96,6 +97,7 @@ const Header: React.FC = () => {
           <Dropdown overlay={menu} trigger={['click']}>
             <Button shape="circle" icon={<SettingOutlined />} />
           </Dropdown>
+          <LanguageSelector />
         </Flex>
         <Flex justify="center" align="center" gap={2}>
           <Divider type="vertical" size="middle" />

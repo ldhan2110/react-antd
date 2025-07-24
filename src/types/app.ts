@@ -5,6 +5,7 @@ export interface Tab {
 
 export interface AppState {
   darkMode: boolean;
+  lang: 'en' | 'ko' | 'ja';
   openedTabs: Tab[];
   selectedTab: Tab;
 }
@@ -15,6 +16,9 @@ export interface AppStore {
   // Dark Mode Management
   toggleDarkMode: () => void;
   setDarkMode: (darkMode: boolean) => void;
+
+  // Language Management
+  setLang: (lang: 'en' | 'ko' | 'ja') => void;
 
   // Tabs Managaments
   openTab: (screen: Tab) => void;
