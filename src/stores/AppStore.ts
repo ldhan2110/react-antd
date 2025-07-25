@@ -1,6 +1,7 @@
 import { makeAutoObservable, runInAction, reaction } from 'mobx';
 import type { AppStore as IAppStore, AppState, Tab } from '../types/app';
 import { DEFAULT_STATE, getAppState, saveAppState } from '../utils/storage';
+import { HrStore } from './modules';
 
 export class RootStore implements IAppStore {
   // Default state for the app
@@ -12,15 +13,24 @@ export class RootStore implements IAppStore {
   private autoSaveInterval: NodeJS.Timeout | null = null;
   private stateReactionDisposer: (() => void) | null = null;
 
+  //Sub-Store
+  public readonly hrStore: HrStore;
+
   // Initialize the store with default values
   constructor() {
     makeAutoObservable(
       this,
       {
         state: true,
+        hrStore: false,
       },
       { autoBind: true }
     );
+
+    // Initialize sub-stores
+    this.hrStore = new HrStore(this);
+
+    // Initialize the main store
     this.initializeStore();
     this.setupAutoSave();
   }
@@ -107,6 +117,12 @@ export class RootStore implements IAppStore {
   }
 
   // ===== DELEGATED METHODS (for AppStore interface compliance) =====
+  setEmployeeList = (employeeList: Array<{ id: string; name: string }>) => {
+    this.hrStore.setEmployeeList(employeeList);
+  };
+  setSelectedEmployeeId = (employeeId: string | null) => {
+    this.hrStore.setSelectedEmployeeId(employeeId);
+  };
   toggleDarkMode = () => {};
   setDarkMode = (darkMode: boolean) => {
     runInAction(() => {

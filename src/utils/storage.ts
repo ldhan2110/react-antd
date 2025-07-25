@@ -13,6 +13,10 @@ export const DEFAULT_STATE: AppState = {
   lang: 'en',
   openedTabs: [DEFAULT_SCREEN],
   selectedTab: DEFAULT_SCREEN,
+  hr: {
+    selectedEmployeeId: null,
+    employeeList: [],
+  },
 };
 
 // Configure localForage

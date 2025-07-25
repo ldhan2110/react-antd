@@ -8,6 +8,10 @@ export interface AppState {
   lang: 'en' | 'ko' | 'ja';
   openedTabs: Tab[];
   selectedTab: Tab;
+  hr: {
+    selectedEmployeeId: string | null;
+    employeeList: Array<{ id: string; name: string }>;
+  };
 }
 
 export interface AppStore {

@@ -1,5 +1,8 @@
 import type React from 'react';
 import Table, { type TableColumnProps } from '../../../components/tables/Table';
+import { observer } from 'mobx-react-lite';
+import appStore from '../../../stores/AppStore';
+import { Button } from 'antd';
 
 const columns: TableColumnProps = [
   {
@@ -21,10 +24,13 @@ const data = [
   { id: 5, name: 'Margret Marmajuke', age: '16', col: 'yellow', dob: '31/01/1999' },
 ];
 
-const HrPage: React.FC = () => {
+const HrPage: React.FC = observer(() => {
+  const { hr } = appStore.state;
   return (
     <div className="flex items-center justify-center h-full flex-col">
       <div className="max-w-4xl w-full">
+        <Button onClick={() => appStore.setSelectedEmployeeId('203741')}>Set Employee ID</Button>
+        <div>{hr.selectedEmployeeId}</div>
         <Table
           data={data}
           columns={columns}
@@ -73,6 +79,6 @@ const HrPage: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 
 export default HrPage;
