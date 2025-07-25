@@ -13,7 +13,7 @@ const LANGUAGES = [
 ];
 
 const LanguageSelector: React.FC = observer(() => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const { lang } = appStore.state;
 
   const handleChange = (value: string) => {
@@ -31,12 +31,9 @@ const LanguageSelector: React.FC = observer(() => {
   );
 
   return (
-    <>
-      <Select value={lang} onChange={handleChange} style={{ width: 110 }}>
-        {LANGUAGES.map(renderOption)}
-      </Select>
-      <div>{t('Undo')}</div>
-    </>
+    <Select value={lang} onChange={handleChange} style={{ width: 110 }}>
+      {LANGUAGES.map(renderOption)}
+    </Select>
   );
 });
 
